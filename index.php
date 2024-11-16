@@ -1,5 +1,5 @@
 <?php
 
-echo "Hello sameer this is jenkins test";
+echo "Hello sam this is jenkins test";
 
 ?>
