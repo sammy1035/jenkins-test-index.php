@@ -1,6 +1,5 @@
 <?php
 
-//phpinfo( );
-echo "Hello";
+echo "Hello sameer this is jenkins test";
 
 ?>
