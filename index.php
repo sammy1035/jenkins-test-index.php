@@ -1,5 +1,6 @@
 <?php
 
-echo "HI There!!! jenkins test";
+//echo "HI There!!! jenkins test";
+phpinfo();
 
 ?>
