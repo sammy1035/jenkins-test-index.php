@@ -1,6 +1,6 @@
 <?php
 
-echo "HI Sameer!!! CICD Test!!";
+echo "H Sameer!!! CICD Test!!";
 //phpinfo();
 
 ?>
