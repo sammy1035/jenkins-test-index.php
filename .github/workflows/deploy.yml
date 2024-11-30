@@ -20,6 +20,7 @@ jobs:
         username: sammy
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
+        timeout: 60
         script: |
           cd /var/www/html/myproject
           git pull origin main
