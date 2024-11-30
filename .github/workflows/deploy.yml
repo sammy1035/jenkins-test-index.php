@@ -1,0 +1,26 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Deploy to Server
+      uses: appleboy/ssh-action@v0.1.6
+      with:
+        host: 172.18.1.111
+        username: sammy
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd /var/www/html/myproject
+          git pull origin main
+          sudo systemctl restart nginx  # Replace with your service
