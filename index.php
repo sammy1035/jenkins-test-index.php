@@ -1,6 +1,6 @@
 <?php
 
-echo "Hello!! Sameer!!! Finally CICD Test is doing good testrun2!!";
+echo "Hello!! Sameer!!! Thank GOD Finally CICD Test is doing good!!";
 //phpinfo();
 
 
