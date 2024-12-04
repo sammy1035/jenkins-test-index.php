@@ -3,27 +3,19 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - master  # Adjust this if your branch name is different
+      - master
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-
+    runs-on: self-hosted  # Specify self-hosted runner
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-    - name: Deploy to Server
-      uses: appleboy/ssh-action@v0.1.6
-      with:
-        host: 172.18.1.111  # Your server's IP
-        username: sammy     # Your SSH user
-        key: ${{ secrets.SSH_PRIVATE_KEY }}  # Reference to the private key secret
-        port: 22            # Default SSH port, adjust if needed
-        script: |
+      - name: Deploy to Server
+        run: |
+          ssh user@172.18.1.111 <<EOF
           cd /var/www/html/myproject
-          
           git pull origin main
-          
-          sudo systemctl restart nginx # Restart web server or relevant service
-
+          sudo systemctl restart nginx
+          EOF
