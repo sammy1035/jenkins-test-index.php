@@ -22,10 +22,8 @@ jobs:
         port: 22            # Default SSH port, adjust if needed
         script: |
           cd /var/www/html/myproject
-          git reset --hard  # Reset any uncommitted changes (optional but recommended)
+          
           git pull origin main
-          composer install --no-dev --optimize-autoloader  # Laravel projects (adjust as needed)
-          php artisan migrate --force  # Apply migrations (if applicable)
-          php artisan optimize         # Optimize the application
+          
           sudo systemctl restart nginx # Restart web server or relevant service
 
