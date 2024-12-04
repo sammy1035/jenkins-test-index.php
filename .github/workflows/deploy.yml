@@ -3,7 +3,7 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - master
+      - master  # Adjust this if your branch name is different
 
 jobs:
   deploy:
@@ -16,11 +16,16 @@ jobs:
     - name: Deploy to Server
       uses: appleboy/ssh-action@v0.1.6
       with:
-        host: 172.18.1.111
-        username: sammy
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: 22
+        host: 172.18.1.111  # Your server's IP
+        username: sammy     # Your SSH user
+        key: ${{ secrets.SSH_PRIVATE_KEY }}  # Reference to the private key secret
+        port: 22            # Default SSH port, adjust if needed
         script: |
           cd /var/www/html/myproject
+          git reset --hard  # Reset any uncommitted changes (optional but recommended)
           git pull origin main
-          sudo systemctl restart nginx  # Replace with your service
+          composer install --no-dev --optimize-autoloader  # Laravel projects (adjust as needed)
+          php artisan migrate --force  # Apply migrations (if applicable)
+          php artisan optimize         # Optimize the application
+          sudo systemctl restart nginx # Restart web server or relevant service
+
