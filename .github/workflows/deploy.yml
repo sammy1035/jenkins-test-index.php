@@ -12,10 +12,28 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      # - name: Deploy to Server
+      #   run: |
+      #     ssh user@172.18.1.111 <<EOF
+      #     cd /var/www/html/myproject
+      #     git pull origin main
+      #     sudo systemctl restart nginx
+      #     EOF
+
+
+      - name:  Deploy to Server
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H 172.18.1.111 >> ~/.ssh/known_hosts
+
       - name: Deploy to Server
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock  # Ensure SSH agent works
         run: |
           ssh user@172.18.1.111 <<EOF
           cd /var/www/html/myproject
           git pull origin main
           sudo systemctl restart nginx
           EOF
+
+
